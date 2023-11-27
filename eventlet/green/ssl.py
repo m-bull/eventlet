@@ -105,10 +105,7 @@ class GreenSSLSocket(_original_sslsocket):
             sock = GreenSocket(sock)
         self.act_non_blocking = sock.act_non_blocking
 
-        if six.PY2:
-            # On Python 2 SSLSocket constructor queries the timeout, it'd break without
-            # this assignment
-            self._timeout = sock.gettimeout()
+        self._timeout = sock.gettimeout()
 
         if _is_under_py_3_7:
             # nonblocking socket handshaking on connect got disabled so let's pretend it's disabled
